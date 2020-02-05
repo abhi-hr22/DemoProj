@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="datatypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="string" />
+      <xs:enumeration value="date" />
+      <xs:enumeration value="int" />
+      <xs:enumeration value="float" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="integrationconfig">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="datasources">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="2" maxOccurs="unbounded" name="datasource">
+                <xs:complexType>
+                  <xs:attribute name="datasourcename" type="xs:string" use="required" />
+                  <xs:attribute name="connectionstring" type="xs:string" use="required" />
+                  <xs:attribute name="username" type="xs:string" use="required" />
+                  <xs:attribute name="password" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dataflows">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element  minOccurs="1" maxOccurs="unbounded" name="dataflow">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="dataflowdescription" type="xs:string"  minOccurs="0" />
+                    <xs:element name="sourceadapter">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="filterquery" type="xs:string"  minOccurs="0" />
+                          <xs:element name="properties">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="2" maxOccurs="unbounded" name="property">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="transformationlogic" type="xs:string" />
+                                    </xs:sequence>
+                                    <xs:attribute name="displayname" type="xs:string" use="required" />
+                                    <xs:attribute name="sourcecolumnname" type="xs:string" use="required" />
+                                    <xs:attribute name="datatype" type="xs:string" use="required" />
+                                    <xs:attribute name="weight" type="xs:integer" default="0" />
+                                    <xs:attribute name="pk" type="xs:boolean" default="false" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="displayname" type="xs:string" use="required" />
+                        <xs:attribute name="adapterclass" type="xs:string" use="required" />
+                        <xs:attribute name="datasourcename" type="xs:string" use="required" />
+                        <xs:attribute name="pollingintervalinminutes" type="xs:integer" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="targetadapter">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="properties">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="2" maxOccurs="unbounded" name="property">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="transformationlogic" type="xs:string" minOccurs="0" />
+                                    </xs:sequence>
+                                    <xs:attribute name="displayname" type="xs:string" use="required" />
+                                    <xs:attribute name="targetcolumnname" type="xs:string" use="required" />
+                                    <xs:attribute name="datatype" type="datatypes" use="required" />
+                                    <xs:attribute name="weight" type="xs:integer" default="0" />
+                                    <xs:attribute name="pk" type="xs:boolean" default="false"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="recordfilter" type="xs:string"  minOccurs="0" />
+                        </xs:sequence>
+                        <xs:attribute name="displayname" type="xs:string" use="required" />
+                        <xs:attribute name="adapterclass" type="xs:string" use="required" />
+                        <xs:attribute name="datasourcename" type="xs:string" use="required" />
+                        <xs:attribute name="previewonly" type="xs:boolean" default="false" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="displayname" type="xs:string" use="required" />
+                  <xs:attribute name="mccl" type="xs:integer" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="settings">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="setting">
+                <xs:complexType>
+                  <xs:attribute name="key" type="xs:string" use="required" />
+                  <xs:attribute name="value" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

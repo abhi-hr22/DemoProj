@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<integrationconfig>
+	<datasources>
+		<datasource datasourcename="MyDataSource" connectionstring="blahblah;:" username="sadfas" password="asdfasd" />
+		<datasource datasourcename="MyDataSource" connectionstring="blahblah;:" username="sadfas" password="asdfasd" />
+	</datasources>
+
+	<dataflows>
+		<dataflow displayname="myfirstdataflow" mccl="75">
+			<dataflowdescription><![CDATA[]]></dataflowdescription>
+			<sourceadapter displayname="My first source adapter" adapterclass="BFRestSourceAdapter" datasourcename="MyDataSource" pollingintervalinminutes="1500">
+				<filterquery><![CDATA[]]></filterquery>
+				<properties>
+					<!-- Properties with 0 weight, will not be considered for Identity Correlation -->
+					<property displayname=""
+								sourcecolumnname=""
+								datatype=""
+								weight="25"
+								pk="false">
+						<transformationlogic>
+							<!-- def tranform(thisValue):
+							<![CDATA[]>
+							<!- return thisValue -->
+						</transformationlogic>
+					</property>
+					<!-- Properties with 0 weight, will not be considered for Identity Correlation -->
+					<property	displayname=""
+								sourcecolumnname=""
+								datatype=""
+								weight="25"
+								pk="false">
+						<transformationlogic>
+							<!-- def tranform(thisValue): 
+							<![CDATA[]>
+							<!- return thisValue -->
+						</transformationlogic>
+					</property>
+				</properties>
+			</sourceadapter>
+
+			<targetadapter displayname="myfirsttargetadapter" adapterclass="SNRestTargetAdapter" datasourcename="MySecondDatasource" previewonly="True/False">
+				<properties>
+					<!-- Properties with 0 weight, will not be considered for Identity Correlation -->
+					<property	displayname=""
+								sourcecolumnname=""
+								datatype=""
+								weight="25"
+								pk="false">
+						<transformationlogic>
+							<!-- def tranform(thisValue): -->
+							<![CDATA[]]>
+							<!-- return thisValue -->
+						</transformationlogic>
+					</property>
+					<!-- Properties with 0 weight, will not be considered for Identity Correlation -->
+					<property	displayname=""
+								sourcecolumnname=""
+								datatype=""
+								weight="25"
+								pk="false">
+						<transformationlogic>
+							<!-- def tranform(thisValue): -->
+							<![CDATA[]]>
+							<!-- return thisValue -->
+						</transformationlogic>
+					</property>				
+				</properties>
+				<recordfilter>
+					<!-- 
+					This Filter should analyze the given record, which emulates the configuration above... 
+					thisRecord.[SourceColumnName] = Value (Cast to DataType)
+
+					It should explicitly return a boolean value to indicate whether a record be posted to the target system.
+
+					def IgnoreRecord(thisRecord): 
+					-->
+					<![CDATA[]]>
+				</recordfilter>
+			</targetadapter>
+		</dataflow>
+	</dataflows>
+	<settings>
+		<setting key="a1" value="10" />
+		<setting key="b1" value="20" />
+	</settings>
+</integrationconfig>
